@@ -1,20 +1,26 @@
-import { JobsItem } from "./assets/components/ui/jobs-item";
-import { dataJobs } from "./jobsdata/jobs";
+import { JobItem } from "./assets/components/ui/job-item";
+import { dataJobs } from "./data/datajob";
 
 export function App() {
   return (
     <>
-      <div className="m-10 flex justify-center max-w-64xl">
-        <h1 className="font-bold text-2xl font-neutral-400">MY JOBS</h1>
+      <div className="m-10 flex justify-center max-w-5xl">
+        <h1 className="font-bold text-4xl text-slate-800 font-neutral-400">
+          MY JOBS
+        </h1>
       </div>
 
-      <div className="m-10 flex justify-center max-w-64xl">
-        <section className="space-y-2">
+      <div className="mx-10 max-w-5xl">
+        <h2 className="font-bold text-2xl text-slate-800 font-neutral-400">
+          Job Desk
+        </h2>
+        <hr />
+        <section className="my-4">
           <div>
-            <ul className="flex justify-between gap-2">
+            <ul className="flex-row text-2xl  justify-between gap-2">
               {dataJobs.map((Jobs) => (
-                <li key={Jobs.id}>
-                  <JobsItem jobs={Jobs} />
+                <li key={Jobs.id} className="my-2">
+                  <JobItem job={Jobs} />
                 </li>
               ))}
             </ul>
