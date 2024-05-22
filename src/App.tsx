@@ -12,7 +12,7 @@ export function App() {
         </div>
 
         <div className="mx-10 max-w-5xl">
-          <h2 className="font-bold text-2xl text-slate-800 font-neutral-400">
+          <h2 className="font-bold text-2xl my-4 text-slate-800 font-neutral-400">
             Job Desk
           </h2>
           <hr />
@@ -20,7 +20,7 @@ export function App() {
             <div>
               <ul className="flex-row text-2xl  justify-between gap-2">
                 {dataJobs.map((Jobs) => (
-                  <li key={Jobs.id} className="my-2">
+                  <li key={Jobs.id} className="my-2 ">
                     <JobItem job={Jobs} />
                   </li>
                 ))}
