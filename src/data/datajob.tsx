@@ -4,6 +4,8 @@ export type JobType = {
   category: string;
   divisions: string;
   isDone: boolean;
+  timeStart?: Date;
+  timeEnd?: Date;
 };
 export const dataJobs: JobType[] = [
   {
@@ -25,6 +27,8 @@ export const dataJobs: JobType[] = [
     jobs: "Teach",
     category: "soon",
     divisions: "staff",
-    isDone: true
+    isDone: true,
+    timeStart: new Date("2024-05-22 19:30"),
+    timeEnd: new Date("2024-05-22 21:30")
   }
 ];
