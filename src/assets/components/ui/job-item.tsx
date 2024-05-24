@@ -8,7 +8,7 @@ export function JobItem({ job }: { job: JobType }) {
   return (
     <div className="flex  justify-between">
       <div className="flex gap-5">
-        <p className="">{job.jobs}</p>
+        <p className="">{job.title}</p>
         {timeStart && timeEnd && (
           <p>
             <time dateTime={timeStart} className="text-green-500">
@@ -23,7 +23,7 @@ export function JobItem({ job }: { job: JobType }) {
       </div>
 
       <p>
-        {job.divisions} {job.isDone ? "✅" : "❓"}
+        {job.divisi} {job.isDone ? "✅" : "❓"}
       </p>
     </div>
   );
