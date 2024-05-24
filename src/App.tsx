@@ -6,7 +6,7 @@ export function App() {
 
   const [jobsState, setJobs] = useState(dataJobs);
 
-  const submitNewJob = (event: React.FormEvent<HTMLFormElement>) => {
+  const saveNewJob = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
@@ -26,7 +26,7 @@ export function App() {
 
   return (
     <>
-      <main className="container mx-auto">
+      <main className="container mx-auto dark:text-white">
         <div className="m-10 flex justify-center max-w-5xl">
           <h1 className="font-bold text-4xl text-slate-800 font-neutral-400">
             MY JOBS
@@ -38,8 +38,9 @@ export function App() {
             Job Desk
           </h2>
           <hr />
-          <div>
-            <form action="" onSubmit={submitNewJob}>
+          <div className="my-2 dark:text-white">
+            
+            <form action="" onSubmit={saveNewJob} className="mx-auto">
               <div className="form-control my-2">
                 <label htmlFor="title" className="font-normal text-2xl my-4">
                   Title Job :
@@ -84,7 +85,7 @@ export function App() {
                   type="submit"
                   className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg w-full sm:w-auto px-5 py-2.5 mx-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
-                  Submit New Job
+                  Save
                 </button>
                 <button
                   type="reset"
