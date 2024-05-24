@@ -2,6 +2,7 @@ import { useState } from "react";
 import { JobItem } from "./assets/components/ui/job-item";
 import { JobType, dataJobs } from "./data/datajob";
 
+
 export function App() {
 
   const [jobsState, setJobs] = useState(dataJobs);
@@ -9,7 +10,10 @@ export function App() {
   const saveNewJob = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    
+
     const formData = new FormData(event.currentTarget);
+  
 
     const newdataJob: JobType = {
       id: 10,
@@ -17,6 +21,8 @@ export function App() {
       category: formData.get("category")?.toString() || "Uncategorized",
       divisi: formData.get("divisi")?.toString() || "Tecknik" ,
       isDone:  false ,
+      timeStart: new Date("2024-05-22 08:30"),
+      timeEnd: new Date("2024-05-22 14:30")
     };
 
     setJobs([...dataJobs, newdataJob]);
