@@ -16,7 +16,7 @@ export function App() {
   
 
     const newdataJob: JobType = {
-      id: 10,
+      id: 4,
       title: formData.get("title")?.toString() || "Untitled",
       category: formData.get("category")?.toString() || "Uncategorized",
       divisi: formData.get("divisi")?.toString() || "Tecknik" ,
