@@ -23,7 +23,7 @@ export function JobItem({ job }: { job: Job }) {
       </div>
 
       <p>
-        {job.divisi} {job.isDone ? "✅" : "❓"}
+        {job.id} {job.divisi} {job.isDone ? "✅" : "❓"}
       </p>
     </div>
   );

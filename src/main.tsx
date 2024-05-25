@@ -9,6 +9,7 @@ import { RootRoute } from "./routes/root";
 import { ErrorRoute } from "./routes/error";
 import { DetailJobRoute } from "./routes/job";
 import { JobsRoute } from "./routes/jobs-route";
+import { AddJobRoute } from "./routes/add-job";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "/jobs/:jobId",
         element: <DetailJobRoute />
+      },
+      {
+        path: "/addjobs",
+        element: <AddJobRoute />
       }
     ]
   }

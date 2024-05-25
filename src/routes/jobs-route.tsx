@@ -1,10 +1,8 @@
-import { useState } from "react";
-import { dataJobs } from "../data/jobs";
 import { JobItem } from "../components/ui/job-item";
+import { Link } from "react-router-dom";
+import { dataJobs } from "../data/jobs";
 
 export function JobsRoute() {
-  const [jobsState] = useState(dataJobs);
-
   return (
     <>
       <main className="container dark:text-white">
@@ -18,9 +16,17 @@ export function JobsRoute() {
           <section className="my-4">
             <div>
               <ul className="flex-row text-2xl  justify-between gap-2">
-                {jobsState.map((Jobs) => (
-                  <li key="{Jobs.id}" className="my-2 ">
-                    <JobItem job={Jobs} />
+                {dataJobs.map((job) => (
+                  <li
+                    key={job.id}
+                    className="my-2 dark:bg-stone-400 rounded-md dark:text-black"
+                  >
+                    <Link
+                      to={`/jobs/${job.id}`}
+                      className="block  hover:bg-slate-400"
+                    >
+                      <JobItem job={job} />
+                    </Link>
                   </li>
                 ))}
               </ul>

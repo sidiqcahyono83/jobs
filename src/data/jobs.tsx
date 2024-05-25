@@ -6,7 +6,6 @@ export type Job = {
   isDone: boolean;
   timeStart?: Date;
   timeEnd?: Date;
-  createdAt?: number;
 };
 export const dataJobs: Job[] = [
   {
