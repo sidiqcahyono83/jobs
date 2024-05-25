@@ -13,11 +13,11 @@ export function ErrorRoute() {
       <h1 className="text-pink-700 text-4xl font-bold dark:text-white">
         Oops!
       </h1>
-      <p>
-        <span className="font-bold">Sorry, </span> an unexpected error has
-        occurred.
+      <p className="font-bold text-2xl">
+        {" "}
+        Sorry, an unexpected error has occurred.
       </p>
-      <p>
+      <p className="text-2xl">
         <i>{error.statusText || error.message}</i>
       </p>
     </div>
