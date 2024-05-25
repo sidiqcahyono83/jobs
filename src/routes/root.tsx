@@ -22,13 +22,13 @@ export function Root() {
     <>
       <main className="container mx-auto dark:text-white">
         <div className="m-10 flex justify-center max-w-5xl">
-          <h1 className="font-bold text-4xl text-slate-800 font-neutral-400">
+          <h1 className="font-bold text-4xl text-slate-800 font-neutral-400  dark:text-white">
             MY JOBS
           </h1>
         </div>
 
         <div className="mx-10 max-w-5xl">
-          <h2 className="font-bold text-2xl my-4 text-slate-800 font-neutral-400">
+          <h2 className="font-bold text-2xl my-4 text-slate-800 font-neutral-400  dark:text-white">
             Job Desk
           </h2>
           <hr />
