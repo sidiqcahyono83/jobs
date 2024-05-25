@@ -1,8 +1,7 @@
-import { JobType } from "../../data/jobs";
+import { Job } from "../../data/jobs";
 import { getTimeString } from "../../datetime/date";
 
-
-export function JobItem({ job }: { job: JobType }) {
+export function JobItem({ job }: { job: Job }) {
   const timeStart = getTimeString(job.timeStart);
   const timeEnd = getTimeString(job.timeEnd);
 

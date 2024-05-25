@@ -1,22 +1,30 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
+
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "./index.css";
-import { Root } from "./routes/root";
+import { RootRoute } from "./routes/root";
 import { ErrorRoute } from "./routes/error";
-import { HomeRoute } from "./routes/home";
+import { DetailJobRoute } from "./routes/job";
+import { JobsRoute } from "./routes/jobs-route";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />,
-    errorElement: <ErrorRoute />
-  },
-  {
-    path: "/home",
-    element: <HomeRoute />
+    element: <RootRoute />,
+    errorElement: <ErrorRoute />,
+    children: [
+      {
+        path: "/jobs",
+        element: <JobsRoute />
+      },
+      {
+        path: "/jobs/:jobId",
+        element: <DetailJobRoute />
+      }
+    ]
   }
 ]);
 

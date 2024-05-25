@@ -1,4 +1,4 @@
-export type JobType = {
+export type Job = {
   id: number;
   title: string;
   category: string;
@@ -6,8 +6,9 @@ export type JobType = {
   isDone: boolean;
   timeStart?: Date;
   timeEnd?: Date;
+  createdAt?: number;
 };
-export const dataJobs: JobType[] = [
+export const dataJobs: Job[] = [
   {
     id: 1,
     title: "Repair",
