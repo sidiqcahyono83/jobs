@@ -1,5 +1,6 @@
-import { JobType } from "../../../data/datajob";
-import { getTimeString } from "../../../utils/datetime";
+import { JobType } from "../../data/jobs";
+import { getTimeString } from "../../datetime/date";
+
 
 export function JobItem({ job }: { job: JobType }) {
   const timeStart = getTimeString(job.timeStart);

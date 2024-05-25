@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { JobItem } from "./assets/components/ui/job-item";
-import { JobType, dataJobs } from "./data/datajob";
+import { JobItem } from "./components/ui/job-item";
+import { JobType, dataJobs } from "./data/jobs";
 
 
 export function App() {
@@ -25,7 +25,7 @@ export function App() {
       timeEnd: new Date("2024-05-22 14:30")
     };
 
-    setJobs([...dataJobs, newdataJob]);
+    setJobs([...jobsState, newdataJob]);
   };
 
 
