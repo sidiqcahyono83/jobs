@@ -76,8 +76,6 @@ export function AddJobRoute() {
           </button>
         </form>
       </div>
-
-      <hr />
     </div>
   );
 }

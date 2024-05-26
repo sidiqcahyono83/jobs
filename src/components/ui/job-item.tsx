@@ -6,11 +6,12 @@ export function JobItem({ job }: { job: Job }) {
   const timeEnd = getTimeString(job.timeEnd);
 
   return (
-    <div className="flex  justify-between">
+    <div className="flex justify-between">
       <div className="flex gap-5">
+        <p className="mx-2 font-mono">{job.id} </p>
         <p className="">{job.title}</p>
         {timeStart && timeEnd && (
-          <p>
+          <p className="gap-6">
             <time dateTime={timeStart} className="text-green-500">
               {timeStart}
             </time>
@@ -23,7 +24,7 @@ export function JobItem({ job }: { job: Job }) {
       </div>
 
       <p>
-        {job.id} {job.divisi} {job.isDone ? "✅" : "❓"}
+        {job.divisi} {job.isDone ? "✅" : "❓"}
       </p>
     </div>
   );

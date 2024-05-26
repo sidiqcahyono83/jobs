@@ -5,10 +5,10 @@ import { dataJobs } from "../data/jobs";
 export function JobsRoute() {
   return (
     <>
-      <main className="container dark:text-white">
-        <div className="m-10 flex justify-center ">
-          <h1 className="font-bold text-4xl text-slate-800 font-neutral-400  dark:text-white">
-            MY JOBS
+      <main className="dark:text-white">
+        <div className="m-4 ">
+          <h1 className="font-bold mx-4 text-4xl rounded-sm text-slate-800 font-neutral-400  dark:text-white">
+            Jobs List
           </h1>
         </div>
 
@@ -19,11 +19,11 @@ export function JobsRoute() {
                 {dataJobs.map((job) => (
                   <li
                     key={job.id}
-                    className="my-2 dark:bg-stone-400 rounded-md dark:text-black"
+                    className="my-2 dark:text-white hover:rounded-xl"
                   >
                     <Link
                       to={`/jobs/${job.id}`}
-                      className="block  hover:bg-slate-400"
+                      className="block  hover:bg-stone-700"
                     >
                       <JobItem job={job} />
                     </Link>

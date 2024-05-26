@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Job, dataJobs } from "../data/jobs";
 
-export function DetailJobRoute() {
+export function DetailJobRoute({}) {
   const [jobsState, setJobs] = useState(dataJobs);
   const saveNewJob = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -21,7 +21,7 @@ export function DetailJobRoute() {
     <div>
       <h1>Page Job by ID</h1>
       <div className="my-2 dark:text-white">
-        <form action="" onSubmit={saveNewJob} className="mx-auto">
+        <form onSubmit={saveNewJob} className="mx-auto">
           <div className="form-control my-2">
             <label htmlFor="title" className="font-normal text-2xl my-4">
               Title Job :
