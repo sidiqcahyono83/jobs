@@ -1,83 +1,56 @@
 import { useState } from "react";
-import { Job, dataJobs } from "../data/jobs";
+import localforage from "localforage";
+import { Job } from "../data/jobs";
 
-export function DetailJobRoute({}) {
-  const [jobsState, setJobs] = useState(dataJobs);
-  const saveNewJob = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const newdataJob: Job = {
-      id: 4,
-      title: formData.get("title")?.toString() || "Untitled",
-      category: formData.get("category")?.toString() || "Uncategorized",
-      divisi: formData.get("divisi")?.toString() || "Tecknik",
-      isDone: false,
-      timeStart: new Date("2024-05-22 08:30"),
-      timeEnd: new Date("2024-05-22 14:30")
-    };
-    setJobs([...jobsState, newdataJob]);
+export function DetailJobRoute() {
+  const { id } = useParams<{ id: string }>();
+  const [job, setJob] = useState<Job | null>(null);
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  const loadJob = async () => {
+    const storedJobs = await localforage.getItem<Job[]>("jobs");
+    if (storedJobs) {
+      const job = storedJobs.find((j) => j.id === Number(id));
+      if (job) {
+        setJob(job);
+      }
+    }
+    setIsInitialized(true);
   };
+
+  if (!isInitialized) {
+    loadJob();
+  }
+
+  if (!job) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div>
-      <h1>Page Job by ID</h1>
-      <div className="my-2 dark:text-white">
-        <form onSubmit={saveNewJob} className="mx-auto">
-          <div className="form-control my-2">
-            <label htmlFor="title" className="font-normal text-2xl my-4">
-              Title Job :
-            </label>
-            <input
-              type="text"
-              name="title"
-              id="title"
-              className="mx-10 rounded-md py-2.5 px-2.5 text-2xl text-gray-900 bg-transparent border-2 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              placeholder=""
-              required
-            />
-          </div>
-          <div className="form-control my-2">
-            <label htmlFor="category" className="font-normal text-2xl my-4">
-              Category Job :
-            </label>
-            <input
-              type="text"
-              name="category"
-              id="category"
-              className="mx-10 rounded-md py-2.5 px-2.5 text-2xl text-gray-900 bg-transparent border-2 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              placeholder=""
-              required
-            />
-          </div>
-          <div className="form-control my-2">
-            <label htmlFor="divisi" className="font-normal text-2xl my-4">
-              Divisi :
-            </label>
-            <input
-              type="text"
-              name="divisi"
-              id="divisi"
-              className="mx-10 rounded-md py-2.5 px-2.5 text-2xl text-gray-900 bg-transparent border-2 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              placeholder=""
-              required
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg w-full sm:w-auto px-5 py-2.5 mx-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Save
-          </button>
-          <button
-            type="reset"
-            className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
-          >
-            Reset
-          </button>
-        </form>
+    <div className="my-4 mx-10">
+      <h1 className="text-4xl font-bold mb-4">{job.title}</h1>
+      <div className="text-xl">
+        <p>
+          <strong>Category:</strong> {job.category}
+        </p>
+        <p>
+          <strong>Divisi:</strong> {job.divisi}
+        </p>
+        <p>
+          <strong>Is Done:</strong> {job.isDone ? "Yes" : "No"}
+        </p>
+        {job.timeStart && (
+          <p>
+            <strong>Time Start:</strong>{" "}
+            {new Date(job.timeStart).toLocaleString()}
+          </p>
+        )}
+        {job.timeEnd && (
+          <p>
+            <strong>Time End:</strong> {new Date(job.timeEnd).toLocaleString()}
+          </p>
+        )}
       </div>
-
-      <hr />
     </div>
   );
 }

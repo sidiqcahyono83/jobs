@@ -11,7 +11,7 @@ export async function getJobs(query?: string) {
   if (query) {
     jobs = matchSorter(jobs, query, { keys: ["title"] });
   }
-  return jobs.sort(sortBy("last", "createdAt"));
+  return jobs.sort(sortBy("last", "id"));
 }
 
 export async function createJob(formData: FormData) {
