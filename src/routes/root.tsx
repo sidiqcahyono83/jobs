@@ -5,30 +5,31 @@ import { Link, Outlet } from "react-router-dom";
 
 export function RootRoute() {
   return (
-    <div className="justify-center m-10">
+    <main className="box-border h-64 justify-items-center max-w-screen-xl content-center mx-auto">
       <h1 className="text-slate-950 hover:text-teal-800 m-10 dark:text-slate-100 font-bold justify-center text-6xl flex">
         <Link to="/">MY JOBS</Link>
       </h1>
-      <div className="flex w-full">
-        <ul className="w-60 h-96 flex flex-col gap-2 text-2xl font-bold">
-          <li className=" gap-2 my-4 hover:text-blue-800">
+      <div className="flex flex-row">
+        <ul className="flex w-3/12 max-h-full items-center gap-2 text-2xl font-bold flex-col border-2">
+          <li className="hover:text-blue-800">
             <Link to="/jobs" className="flex gap-2">
-              <FaStackOverflow />
+              <FaStackOverflow/>
               My Jobs
             </Link>
           </li>
-          <li className="gap-2 items-center  hover:text-blue-800">
+          <li className="hover:text-blue-800">
             <Link to="/addjobs" className="flex gap-2">
-              <FaPlus />
+              <FaPlus/>
               Add Job
             </Link>
           </li>
         </ul>
-
-        <section className="grow items-start content-normal">
-          <Outlet />
+        
+        <section >
+          <Outlet/>
         </section>
       </div>
-    </div>
+      
+    </main>
   );
 }
