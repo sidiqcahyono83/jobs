@@ -19,7 +19,7 @@ export function RootRoute() {
             </Link>
           </li>
           <li className="hover:text-blue-800 text-xl font-bold">
-            <Link to="/addjobs" className="flex gap-2">
+            <Link to="/addjob" className="flex gap-2">
               <FaPlus />
               Add Job
             </Link>
