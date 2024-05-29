@@ -3,25 +3,7 @@ import localforage from "localforage";
 import { Job, dataJobs } from "../data/jobs";
 
 export function AddJobRoute() {
-  const [jobsState, setJobs] = useState<Job[]>([]);
-  const [isInitialized, setIsInitialized] = useState(false);
-
-  const initializeJobs = async () => {
-    const storedJobs = await localforage.getItem<Job[]>("jobs");
-    if (storedJobs) {
-      setJobs(storedJobs);
-    } else {
-      setJobs(dataJobs);
-      await localforage.setItem("jobs", dataJobs);
-    }
-    setIsInitialized(true);
-  };
-
-  if (!isInitialized) {
-    initializeJobs();
-  }
-
-  const saveNewJob = async (event: React.FormEvent<HTMLFormElement>) => {
+  const saveNewJob = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const newJob: Job = {
@@ -36,7 +18,7 @@ export function AddJobRoute() {
 
     const updatedJobs = [...jobsState, newJob];
     setJobs(updatedJobs);
-    await localforage.setItem("jobs", updatedJobs);
+    localforage.setItem("jobs", updatedJobs);
   };
 
   return (

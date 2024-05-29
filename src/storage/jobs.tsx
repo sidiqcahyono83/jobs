@@ -64,3 +64,8 @@ export async function deleteJob(id: number) {
 function set(jobs: Job[]) {
   return localforage.setItem("jobs", jobs);
 }
+
+function fakeNetwork(arg0: string) {
+  throw new Error("Function not implemented.");
+}
+
