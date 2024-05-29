@@ -12,8 +12,11 @@ export function JobsRoute() {
         </h1>
         <ul>
           {dataJobs.map((job) => (
-            <li key={job.id} className="my-2 dark:text-white hover:rounded-xl">
-              <Link to={`/jobs/${job.id}`} className="block hover:bg-stone-700">
+            <li
+              key={job.id}
+              className="my-4 mx-2 dark:text-white hover:rounded-xl text-xl"
+            >
+              <Link to={`/jobs/${job.id}`} className="block hover:bg-stone-100">
                 <JobItem job={job} />
               </Link>
             </li>
