@@ -1,8 +1,11 @@
 import localforage from "localforage";
 import { Job } from "../data/jobs";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 export function AddJobRoute() {
+  const [jobsState, setJobs] = useState<Job[]>([]);
+
   const saveNewJob = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);

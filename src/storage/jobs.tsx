@@ -65,7 +65,7 @@ function set(jobs: Job[]) {
   return localforage.setItem("jobs", jobs);
 }
 
-function fakeNetwork(arg0: string) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function fakeNetwork(_arg0: string) {
   throw new Error("Function not implemented.");
 }
-
