@@ -9,6 +9,7 @@ export function DetailJobRoute() {
 
   if (!job) {
     return <p>Job not found.</p>;
+    s;
   }
 
   return (
