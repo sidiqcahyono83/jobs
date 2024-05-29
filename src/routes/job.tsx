@@ -2,10 +2,10 @@ import { useParams } from "react-router-dom";
 import { dataJobs } from "../data/jobs";
 
 export function DetailJobRoute() {
-  const id = useParams();
-  const jobId = Number(id);
-
-  const job = dataJobs.find((job) => job.id == jobId);
+  const jobParam = useParams();
+  const jobId = Number(jobParam.jobId);
+ 
+  const job = dataJobs.find((job) => job.id === jobId);
 
   if (!job) {
     return <p>Job not found.</p>;
