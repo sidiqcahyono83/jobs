@@ -5,67 +5,80 @@ import sortBy from "sort-by";
 import { type Job } from "../data/jobs";
 
 export async function getJobs(query?: string) {
-  await fakeNetwork(`getJobs:${query}`);
-  let jobs = (await localforage.getItem("jobs")) as Job[];
-  if (!jobs) jobs = [];
-  if (query) {
-    jobs = matchSorter(jobs, query, { keys: ["title"] });
-  }
-  return jobs.sort(sortBy("last", "id"));
+	await fakeNetwork(`getJobs:${query}`);
+	let jobs = (await localforage.getItem("jobs")) as Job[];
+	if (!jobs) jobs = [];
+	if (query) {
+		jobs = matchSorter(jobs, query, { keys: ["title"] });
+	}
+	return jobs.sort(sortBy("last", "id"));
 }
 
 export async function createJob(formData: FormData) {
-  await fakeNetwork(``);
+	await fakeNetwork(``);
 
-  const newJob: Job = {
-    id: Math.floor(Math.random() * (10_000_000 - 1 + 1) + 1), // 1 to 100
-    title: String(formData.get("title")),
-    category: String(formData.get("category")),
-    divisi: String(formData.get("divisi")),
-    isDone: true,
-    timeStart: new Date("2000-01-01 06:00"),
-    timeEnd: new Date("2000-01-01 07:00")
-  };
+	const newJob: Job = {
+		id: Math.floor(Math.random() * (10_000_000 - 1 + 1) + 1),
+		title: String(formData.get("title")),
+		category: String(formData.get("category")),
+		divisi: String(formData.get("divisi")),
+		isDone: true,
+		timeStart: new Date("2000-01-01 06:00"),
+		timeEnd: new Date("2000-01-01 07:00")
+	};
 
-  const jobs = await getJobs();
-  const newJobs = [...jobs, newJob];
-  await set(newJobs);
-  return newJob;
+	const jobs = await getJobs();
+	const newJobs = [...jobs, newJob];
+	await set(newJobs);
+	return newJob;
 }
 
 export async function getJob(id: number) {
-  await fakeNetwork(`job:${id}`);
-  const jobs = (await localforage.getItem("jobs")) as Job[];
-  const job = jobs.find((job) => job.id === id);
-  return job ?? null;
+	await fakeNetwork(`job:${id}`);
+	const jobs = (await localforage.getItem("jobs")) as Job[];
+	const job = jobs.find((job) => job.id === id);
+	return job ?? null;
 }
 
 export async function updateJob(id: number, updates: Job) {
-  await fakeNetwork(``);
-  const jobs = (await localforage.getItem("jobs")) as Job[];
-  const job = jobs.find((job) => job.id === id);
-  if (!job) throw new Error("No job found for");
-  Object.assign(job, updates);
-  await set(jobs);
-  return job;
+	await fakeNetwork(``);
+	const jobs = (await localforage.getItem("jobs")) as Job[];
+	const job = jobs.find((job) => job.id === id);
+	if (!job) throw new Error("No job found for");
+	Object.assign(job, updates);
+	await set(jobs);
+	return job;
 }
 
 export async function deleteJob(id: number) {
-  const jobs = (await localforage.getItem("jobs")) as Job[];
-  const index = jobs.findIndex((job) => job.id === id);
-  if (index > -1) {
-    jobs.splice(index, 1);
-    await set(jobs);
-    return true;
-  }
-  return false;
+	const jobs = (await localforage.getItem("jobs")) as Job[];
+	const index = jobs.findIndex((job) => job.id === id);
+	if (index > -1) {
+		jobs.splice(index, 1);
+		await set(jobs);
+		return true;
+	}
+	return false;
 }
 
 function set(jobs: Job[]) {
-  return localforage.setItem("jobs", jobs);
+	return localforage.setItem("jobs", jobs);
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function fakeNetwork(_arg0: string) {
-  throw new Error("Function not implemented.");
+let fakeCache = {};
+
+async function fakeNetwork(key: string) {
+	if (!key) {
+		fakeCache = {};
+	}
+	//@ts-expect-error-error Later
+	if (fakeCache[key]) {
+		return;
+	}
+	//@ts-expect-error-error Later
+	fakeCache[key] = true;
+	return new Promise((res) => {
+		setTimeout(res, Math.random() * 800);
+	});
 }
