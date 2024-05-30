@@ -15,12 +15,18 @@ export function AddJobRoute() {
 			category: formData.get("category")?.toString() || "Uncategorized",
 			divisi: formData.get("divisi")?.toString() || "Teknik",
 			isDone: false,
-			timeStart: new Date("2024-05-22 08:30"),
-			timeEnd: new Date("2024-05-22 14:30")
+			timeStart: formData.get("timeStart")
+				? new Date("2024-05-22 08:30")
+				: new Date(),
+			timeEnd: formData.get("timeEnd")
+				? new Date("2024-05-22 14:30")
+				: new Date()
 		};
 
 		const updatedJobs = [...jobs, newJob];
 		setJobs(updatedJobs);
+		console.log(updatedJobs);
+
 		localforage.setItem("jobs", updatedJobs);
 	};
 

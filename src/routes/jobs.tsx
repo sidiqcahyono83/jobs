@@ -6,6 +6,7 @@ import { getJobs } from "../storage/jobs";
 // eslint-disable-next-line react-refresh/only-export-components
 export async function loader() {
 	const jobs = await getJobs();
+	console.log(jobs);
 	return { jobs };
 }
 
