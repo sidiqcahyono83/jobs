@@ -2,8 +2,13 @@ import { useParams } from "react-router-dom";
 import { dataJobs } from "../data/jobs";
 
 export function DetailJobRoute() {
+<<<<<<< HEAD
 	const idParam = useParams();
 	const jobId = Number(idParam.jobId);
+=======
+	const jobParam = useParams();
+	const jobId = Number(jobParam.jobId);
+>>>>>>> 47ab41613c6e3e99b6c1fdcdb9aebee6ef8b0632
 
 	const job = dataJobs.find((job) => job.id === jobId);
 
