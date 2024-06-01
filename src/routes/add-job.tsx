@@ -15,17 +15,9 @@ export function AddJobRoute() {
 			category: formData.get("category")?.toString() || "Uncategorized",
 			divisi: formData.get("divisi")?.toString() || "Teknik",
 			isDone: false,
-<<<<<<< HEAD
+
 			timeStart: new Date("2024-05-22 08:30"),
 			timeEnd: new Date("2024-05-22 14:30")
-=======
-			timeStart: formData.get("timeStart")
-				? new Date("2024-05-22 08:30")
-				: new Date(),
-			timeEnd: formData.get("timeEnd")
-				? new Date("2024-05-22 14:30")
-				: new Date()
->>>>>>> 47ab41613c6e3e99b6c1fdcdb9aebee6ef8b0632
 		};
 
 		const updatedJobs = [...jobs, newJob];
@@ -105,11 +97,7 @@ export function AddJobRoute() {
 							htmlFor="timeEnd"
 							className="font-normal text-2xl my-4"
 						>
-<<<<<<< HEAD
 							Time End :
-=======
-							Time Start :
->>>>>>> 47ab41613c6e3e99b6c1fdcdb9aebee6ef8b0632
 						</label>
 						<input
 							type="date"
