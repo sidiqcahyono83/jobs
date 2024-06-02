@@ -1,12 +1,10 @@
 import { Link, useLoaderData } from "react-router-dom";
-import { JobItem } from "../components/ui/job-item";
 
 import { getJobs } from "../storage/jobs";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export async function loader() {
 	const jobs = await getJobs();
-	console.log(jobs);
 	return { jobs };
 }
 
@@ -19,21 +17,25 @@ export function JobsRoute() {
 				<h1 className="font-bold mx-4 text-4xl rounded-sm text-slate-800 font-neutral-400 dark:text-white">
 					Jobs List
 				</h1>
-				<ul>
-					{jobs.map((job) => (
-						<li
-							key={job.id}
-							className="my-4 mx-2 dark:text-white hover:rounded-xl text-xl"
-						>
-							<Link
-								to={`/jobs/${job.id}`}
-								className="block hover:bg-stone-100"
+				{jobs.length ? (
+					<ul>
+						{jobs.map((job) => (
+							<li
+								key={job.id}
+								className="my-4 mx-2 dark:text-white hover:rounded-xl text-xl"
 							>
-								<JobItem job={job} />
-							</Link>
-						</li>
-					))}
-				</ul>
+								<Link
+									to={`/jobs/${job.id}`}
+									className="block hover:bg-stone-100"
+								>
+									<>{job.title}</>
+								</Link>
+							</li>
+						))}
+					</ul>
+				) : (
+					<p>Job Not Found</p>
+				)}
 			</div>
 		</>
 	);

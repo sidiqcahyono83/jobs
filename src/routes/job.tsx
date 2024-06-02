@@ -1,11 +1,14 @@
-import { useParams } from "react-router-dom";
-import { dataJobs } from "../data/jobs";
+import { useLoaderData, LoaderFunctionArgs } from "react-router-dom";
+import { getJob } from "../storage/jobs";
+
+export async function loader({ params }: LoaderFunctionArgs) {
+	const idParam = Number(params.jobId);
+	const job = await getJob(idParam);
+	return { job };
+}
 
 export function DetailJobRoute() {
-	const jobParam = useParams();
-	const jobId = Number(jobParam.jobId);
-
-	const job = dataJobs.find((job) => job.id === jobId);
+	const { job } = useLoaderData() as Awaited<ReturnType<typeof loader>>;
 
 	if (!job) {
 		return <p>Job not found.</p>;

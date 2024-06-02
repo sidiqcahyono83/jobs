@@ -17,7 +17,7 @@ export function Nav() {
 					</Link>
 				</li>
 				<li className="hover:text-blue-800 text-xl font-bold">
-					<Link to="/jobs/add-job" className="flex gap-2">
+					<Link to="/add-job" className="flex gap-2">
 						<FaPlus />
 						Add Job
 					</Link>

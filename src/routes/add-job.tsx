@@ -1,41 +1,18 @@
-import localforage from "localforage";
-import { Link, useLoaderData } from "react-router-dom";
+import { ActionFunctionArgs, Form, redirect } from "react-router-dom";
+import { createJob } from "../storage/jobs";
 
-import { Job } from "../data/jobs";
-import { getJobs } from "../storage/jobs";
-
-export async function loader() {
-	const jobs = await getJobs();
-	return { jobs };
+export async function action({ request }: ActionFunctionArgs) {
+	const formData = await request.formData();
+	const job = await createJob(formData);
+	return redirect(`/jobs/${job.id}`);
 }
 
 export function AddJobRoute() {
-	const { jobs } = useLoaderData() as Awaited<ReturnType<typeof loader>>;
-
-	const saveNewJob = (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		const formData = new FormData(event.currentTarget);
-
-		const newJob: Job = {
-			id: length + 1,
-			title: formData.get("title")?.toString() || "Untitled",
-			category: formData.get("category")?.toString() || "Uncategorized",
-			divisi: formData.get("divisi")?.toString() || "Teknik",
-			isDone: false,
-			timeStart: new Date("2024-05-22 08:30"),
-			timeEnd: new Date("2024-05-22 14:30"),
-		};
-
-		const updatedJobs = [...jobs, newJob];
-
-		localforage.setItem("jobs", updatedJobs);
-	};
-
 	return (
 		<div>
 			<div className="my-2 dark:text-white">
 				<h1 className="text-4xl font-bold my-4 mb-4">Add Job</h1>
-				<form onSubmit={saveNewJob} className="mx-auto">
+				<Form method="post" className="mx-auto">
 					<div className="form-control my-2 items-center">
 						<label
 							htmlFor="title"
@@ -115,7 +92,7 @@ export function AddJobRoute() {
 						type="submit"
 						className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg w-full sm:w-auto px-4 py-2 mx-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
 					>
-						<Link to="/jobs">Save</Link>
+						Save
 					</button>
 					<button
 						type="reset"
@@ -123,7 +100,7 @@ export function AddJobRoute() {
 					>
 						Reset
 					</button>
-				</form>
+				</Form>
 			</div>
 		</div>
 	);

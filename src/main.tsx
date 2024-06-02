@@ -6,10 +6,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import { RootRoute } from "./routes/root";
 import { ErrorRoute } from "./routes/error";
-import { DetailJobRoute } from "./routes/job";
+import { DetailJobRoute, loader as deatailJobsLoader } from "./routes/job";
 
-import { JobsRoute, loader as jobsLoader } from "./routes/jobs-route";
-import { AddJobRoute } from "./routes/add-job";
+import { JobsRoute, loader as jobsLoader } from "./routes/jobs";
+import { AddJobRoute, action as addJobAction } from "./routes/add-job";
 
 const router = createBrowserRouter([
 	{
@@ -23,13 +23,14 @@ const router = createBrowserRouter([
 				loader: jobsLoader,
 			},
 			{
-				path: "/jobs/:jobId",
-				element: <DetailJobRoute />,
+				path: "/add-job",
+				element: <AddJobRoute />,
+				action: addJobAction,
 			},
 			{
-				path: "/jobs/add-job",
-				element: <AddJobRoute />,
-				loader: jobsLoader,
+				path: "/jobs/:jobId",
+				element: <DetailJobRoute />,
+				loader: deatailJobsLoader,
 			},
 		],
 	},
