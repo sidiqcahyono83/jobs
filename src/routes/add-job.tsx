@@ -15,6 +15,7 @@ export function AddJobRoute() {
 	const saveNewJob = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const formData = new FormData(event.currentTarget);
+
 		const newJob: Job = {
 			id: length + 1,
 			title: formData.get("title")?.toString() || "Untitled",
