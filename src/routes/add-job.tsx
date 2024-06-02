@@ -1,10 +1,16 @@
 import localforage from "localforage";
+import { Link, useLoaderData } from "react-router-dom";
+
 import { Job } from "../data/jobs";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { getJobs } from "../storage/jobs";
+
+export async function loader() {
+	const jobs = await getJobs();
+	return { jobs };
+}
 
 export function AddJobRoute() {
-	const [jobs, setJobs] = useState<Job[]>([]);
+	const { jobs } = useLoaderData() as Awaited<ReturnType<typeof loader>>;
 
 	const saveNewJob = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -15,14 +21,11 @@ export function AddJobRoute() {
 			category: formData.get("category")?.toString() || "Uncategorized",
 			divisi: formData.get("divisi")?.toString() || "Teknik",
 			isDone: false,
-
 			timeStart: new Date("2024-05-22 08:30"),
-			timeEnd: new Date("2024-05-22 14:30")
+			timeEnd: new Date("2024-05-22 14:30"),
 		};
 
 		const updatedJobs = [...jobs, newJob];
-		setJobs(updatedJobs);
-		console.log(updatedJobs);
 
 		localforage.setItem("jobs", updatedJobs);
 	};

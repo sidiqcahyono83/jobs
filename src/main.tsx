@@ -20,23 +20,19 @@ const router = createBrowserRouter([
 			{
 				path: "/jobs",
 				element: <JobsRoute />,
-				loader: jobsLoader
+				loader: jobsLoader,
 			},
 			{
 				path: "/jobs/:jobId",
-				element: <DetailJobRoute />
-			},
-			{
-				path: "/add-job",
 				element: <DetailJobRoute />,
-				loader: jobsLoader
 			},
 			{
-				path: "/addjob",
-				element: <AddJobRoute />
-			}
-		]
-	}
+				path: "/jobs/add-job",
+				element: <AddJobRoute />,
+				loader: jobsLoader,
+			},
+		],
+	},
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
