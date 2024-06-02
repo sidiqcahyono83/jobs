@@ -24,7 +24,7 @@ export async function createJob(formData: FormData) {
 		divisi: String(formData.get("divisi")),
 		isDone: true,
 		timeStart: new Date("2000-01-01 06:00"),
-		timeEnd: new Date("2000-01-01 07:00")
+		timeEnd: new Date("2000-01-01 07:00"),
 	};
 
 	const jobs = await getJobs();
@@ -65,18 +65,22 @@ function set(jobs: Job[]) {
 	return localforage.setItem("jobs", jobs);
 }
 
-const fakeCache: { [key: string]: boolean } = {};
-async function fakeNetwork(key: string) {
-	fakeCache[key] = true;
-	return new Promise((resolve) => {
-		setTimeout(resolve, Math.random() * 800);
+// fake a cache so we don't slow down stuff we've already seen
+let fakeCache = {};
 
-		if (fakeCache[key]) {
-			return;
-		}
-		fakeCache[key] = true;
-		return new Promise((res) => {
-			setTimeout(res, Math.random() * 800);
-		});
+async function fakeNetwork(key: string) {
+	if (!key) {
+		fakeCache = {};
+	}
+
+	// @ts-expect-error Later
+	if (fakeCache[key]) {
+		return;
+	}
+
+	// @ts-expect-error Later
+	fakeCache[key] = true;
+	return new Promise((res) => {
+		setTimeout(res, Math.random() * 800);
 	});
 }
