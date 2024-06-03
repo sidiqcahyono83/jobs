@@ -13,8 +13,9 @@ export function JobsRoute() {
 
 	return (
 		<>
+			{/* <main className="w-3/5 mx-auto"> */}
 			<div>
-				<h1 className="font-bold mx-4 text-4xl rounded-sm text-slate-800 font-neutral-400 dark:text-white">
+				<h1 className="font-bold text-4xl rounded-sm text-slate-800 font-neutral-400 dark:text-white">
 					Jobs List
 				</h1>
 				{jobs.length ? (
@@ -22,13 +23,13 @@ export function JobsRoute() {
 						{jobs.map((job) => (
 							<li
 								key={job.id}
-								className="my-4 mx-2 dark:text-white hover:rounded-xl text-xl"
+								className="my-4 inline-flex justify-between dark:text-white hover:rounded-xl text-xl block hover:bg-stone-100"
 							>
-								<Link
-									to={`/jobs/${job.id}`}
-									className="block hover:bg-stone-100"
-								>
-									<>{job.title}</>
+								<Link to={`/jobs/${job.id}`} className="">
+									{job.title}
+									{job.isDone
+										? "\u2714\uFE0F"
+										: "\u23F8\uFE0F"}
 								</Link>
 							</li>
 						))}
@@ -37,6 +38,7 @@ export function JobsRoute() {
 					<p>Job Not Found</p>
 				)}
 			</div>
+			{/* </main> */}
 		</>
 	);
 }

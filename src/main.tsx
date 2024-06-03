@@ -10,6 +10,7 @@ import { DetailJobRoute, loader as deatailJobsLoader } from "./routes/job";
 
 import { JobsRoute, loader as jobsLoader } from "./routes/jobs";
 import { AddJobRoute, action as addJobAction } from "./routes/add-job";
+import { Home } from "./routes/home";
 
 const router = createBrowserRouter([
 	{
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
 				loader: deatailJobsLoader,
 			},
 		],
+	},
+	{
+		path: "/home",
+		element: <Home />,
 	},
 ]);
 
