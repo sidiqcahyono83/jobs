@@ -13,8 +13,7 @@ export function JobsRoute() {
 
 	return (
 		<>
-			{/* <main className="w-3/5 mx-auto"> */}
-			<div>
+			<div className="w-3/5">
 				<h1 className="font-bold text-4xl rounded-sm text-slate-800 font-neutral-400 dark:text-white">
 					Jobs List
 				</h1>
@@ -23,10 +22,14 @@ export function JobsRoute() {
 						{jobs.map((job) => (
 							<li
 								key={job.id}
-								className="my-4 inline-flex justify-between dark:text-white hover:rounded-xl text-xl block hover:bg-stone-100"
+								className="my-4 dark:text-white hover:rounded-xl text-xl block hover:bg-stone-100"
 							>
-								<Link to={`/jobs/${job.id}`} className="">
+								<Link
+									to={`/jobs/${job.id}`}
+									className="flex flex-wrap justify-between"
+								>
 									{job.title}
+									<span></span>
 									{job.isDone
 										? "\u2714\uFE0F"
 										: "\u23F8\uFE0F"}
@@ -38,7 +41,6 @@ export function JobsRoute() {
 					<p>Job Not Found</p>
 				)}
 			</div>
-			{/* </main> */}
 		</>
 	);
 }
