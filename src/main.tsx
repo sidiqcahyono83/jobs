@@ -6,11 +6,11 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import { RootRoute } from "./routes/root";
 import { ErrorRoute } from "./routes/error";
+import { Home } from "./routes/home";
 import { DetailJobRoute, loader as deatailJobsLoader } from "./routes/job";
-
 import { JobsRoute, loader as jobsLoader } from "./routes/jobs";
 import { AddJobRoute, action as addJobAction } from "./routes/add-job";
-import { Home } from "./routes/home";
+import { EditJobRoute } from "./routes/edit-job";
 
 const router = createBrowserRouter([
 	{
@@ -18,6 +18,10 @@ const router = createBrowserRouter([
 		element: <RootRoute />,
 		errorElement: <ErrorRoute />,
 		children: [
+			{
+				path: "/",
+				element: <Home />,
+			},
 			{
 				path: "/jobs",
 				element: <JobsRoute />,
@@ -33,11 +37,12 @@ const router = createBrowserRouter([
 				element: <DetailJobRoute />,
 				loader: deatailJobsLoader,
 			},
+			{
+				path: "jobs/:jobId/edit",
+				element: <EditJobRoute />,
+				loader: jobsLoader,
+			},
 		],
-	},
-	{
-		path: "/home",
-		element: <Home />,
 	},
 ]);
 
