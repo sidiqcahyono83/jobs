@@ -13,7 +13,7 @@ export function JobsRoute() {
 
 	return (
 		<>
-			<div className="w-3/5">
+			<div className="w-4/5 mx-auto">
 				<h1 className="font-bold text-4xl rounded-sm text-slate-800 font-neutral-400 dark:text-white">
 					Jobs List
 				</h1>

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export function Nav() {
 	return (
 		<>
-			<div className="max-w-auto mx-auto">
+			<div className="w-4/5 mx-auto">
 				<nav className="border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
 					<div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
 						<Link

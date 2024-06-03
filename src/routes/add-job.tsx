@@ -9,7 +9,7 @@ export async function action({ request }: ActionFunctionArgs) {
 
 export function AddJobRoute() {
 	return (
-		<div className="w-3/5">
+		<div className="w-4/5 mx-auto">
 			<div className="my-2 dark:text-white">
 				<h1 className="text-4xl font-bold my-4 mb-4">Add Job</h1>
 				<Form method="post" className="mx-auto">
