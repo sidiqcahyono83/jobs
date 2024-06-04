@@ -43,9 +43,9 @@ export function JobsRoute() {
 							>
 								<path
 									stroke="currentColor"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeWidth="2"
 									d="m1 1 4 4 4-4"
 								/>
 							</svg>
@@ -164,9 +164,9 @@ export function JobsRoute() {
 								xmlns="http://www.w3.org/2000/svg"
 							>
 								<path
-									fill-rule="evenodd"
+									fillRule="evenodd"
 									d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-									clip-rule="evenodd"
+									clipRule="evenodd"
 								></path>
 							</svg>
 						</div>
@@ -216,7 +216,10 @@ export function JobsRoute() {
 
 					<tbody>
 						{jobs.map((job) => (
-							<tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+							<tr
+								className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+								key={job.id}
+							>
 								<td className="w-4 p-4">
 									<div className="flex items-center">
 										<input
