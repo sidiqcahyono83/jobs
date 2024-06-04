@@ -61,7 +61,7 @@ export function EditJobRoute() {
 					type="text"
 					name="divisi"
 					placeholder="@jack"
-					defaultValue={job?.divisi}
+					defaultValue={job?.division}
 				/>
 			</label>
 			<label

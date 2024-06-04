@@ -21,7 +21,7 @@ export async function createJob(formData: FormData) {
 		id: Math.floor(Math.random() * (10_000_000 - 1 + 1) + 1),
 		title: String(formData.get("title")),
 		category: String(formData.get("category")),
-		divisi: String(formData.get("divisi")),
+		division: String(formData.get("division")),
 		isDone: false,
 		timeStart: new Date(),
 		timeEnd: new Date(),

@@ -238,7 +238,7 @@ export function JobsRoute() {
 								>
 									{job.title}
 								</th>
-								<td className="px-6 py-4">{job.divisi}</td>
+								<td className="px-6 py-4">{job.division}</td>
 								<td className="px-6 py-4">{job.category}</td>
 								<td className="px-6 py-4">
 									{job.isDone

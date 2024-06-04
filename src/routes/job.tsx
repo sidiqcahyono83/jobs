@@ -19,7 +19,7 @@ export function DetailJobRoute() {
 			<h1 className="text-4xl font-bold mb-4">{job.title}</h1>
 			<div className="text-xl">
 				<p>Category: {job.category}</p>
-				<p>Divisi: {job.divisi}</p>
+				<p>Divisi: {job.division}</p>
 				<p>Is Done: {job.isDone ? "Yes" : "No"}</p>
 				{job.timeStart && (
 					<p>
