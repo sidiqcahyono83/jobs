@@ -11,6 +11,7 @@ import { DetailJobRoute, loader as deatailJobsLoader } from "./routes/job";
 import { JobsRoute, loader as jobsLoader } from "./routes/jobs";
 import { AddJobRoute, action as addJobAction } from "./routes/add-job";
 import { EditJobRoute } from "./routes/edit-job";
+import { ShowJobRoute } from "./routes/jobstable";
 
 const router = createBrowserRouter([
 	{
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
 				path: "jobs/:jobId/edit",
 				element: <EditJobRoute />,
 				loader: jobsLoader,
+			},
+			{
+				path: "/about",
+				element: <ShowJobRoute />,
 			},
 		],
 	},

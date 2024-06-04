@@ -8,7 +8,7 @@ export async function loader() {
 	return { jobs };
 }
 
-export function JobsRoute() {
+export function ShowJobRoute() {
 	const { jobs } = useLoaderData() as Awaited<ReturnType<typeof loader>>;
 	if (!jobs) {
 		<p>Jobs Not Found..</p>;
@@ -197,16 +197,16 @@ export function JobsRoute() {
 								</div>
 							</th>
 							<th scope="col" className="px-6 py-3">
-								Jobs Title
+								Product name
 							</th>
 							<th scope="col" className="px-6 py-3">
-								Devision
+								Color
 							</th>
 							<th scope="col" className="px-6 py-3">
 								Category
 							</th>
 							<th scope="col" className="px-6 py-3">
-								Progres
+								Price
 							</th>
 							<th scope="col" className="px-6 py-3">
 								Action
@@ -241,6 +241,8 @@ export function JobsRoute() {
 								<td className="px-6 py-4">{job.divisi}</td>
 								<td className="px-6 py-4">{job.category}</td>
 								<td className="px-6 py-4">
+									{job.isDone}
+									<span>-</span>
 									{job.isDone
 										? "\u2714\uFE0F"
 										: "\u23F8\uFE0F"}

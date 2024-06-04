@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { Nav } from "./nav";
+import { FooterRoute } from "./footer";
 
 export function RootRoute() {
 	return (
@@ -8,6 +9,7 @@ export function RootRoute() {
 			<section className="my-4 mx-auto">
 				<Outlet />
 			</section>
+			<FooterRoute />
 		</main>
 	);
 }
