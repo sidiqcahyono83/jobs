@@ -1,11 +1,5 @@
-<<<<<<< HEAD
-import {
-	useLoaderData,
-	Form,
-	LoaderFunctionArgs,
-	redirect,
-} from "react-router-dom";
-import { getJob, updateJob } from "../storage/jobs";
+import { Form, LoaderFunctionArgs } from "react-router-dom";
+import { getJob } from "../storage/jobs";
 
 export async function loader({ params }: LoaderFunctionArgs) {
 	const idParam = Number(params.jobId);
@@ -13,24 +7,17 @@ export async function loader({ params }: LoaderFunctionArgs) {
 	return { job };
 }
 
-export async function action({ request, params }) {
-	const formData = await request.formData();
-	const title = formData.get("title");
-	const updates = Object.fromEntries(formData);
-	updates.title;
+// export async function action({ request, params }) {
+// 	const formData = await request.formData();
+// 	const title = formData.get("title");
+// 	const updates = Object.fromEntries(formData);
+// 	updates.title;
 
-	await updateJob(params.jobId, updates);
-	return redirect(`/about/${params.jobId}`);
-}
-
-export function ShowJobRoute() {
-	const { job } = useLoaderData() as Awaited<ReturnType<typeof loader>>;
-
-=======
-import { Form } from "react-router-dom";
+// 	await updateJob(params.jobId, updates);
+// 	return redirect(`/about/${params.jobId}`);
+// }
 
 export function DeleteRoute() {
->>>>>>> 7084e6adf4764abc494ebe53e47146f967b10742
 	return (
 		<div>
 			<Form method="post" className="max-w-md mx-auto">
@@ -41,7 +28,6 @@ export function DeleteRoute() {
 						id="title"
 						className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
 						placeholder=" "
-						defaultValue={job?.title}
 					/>
 					<label
 						htmlFor="title"
