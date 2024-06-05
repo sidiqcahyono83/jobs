@@ -9,6 +9,24 @@ export async function loader({ params }: LoaderFunctionArgs) {
 	return { job };
 }
 
+// export async function action({ request, params }: LoaderFunctionArgs) {
+// 	const idParam = Number(params.jobId);
+// 	const formData = await request.formData();
+// 	const updates = [
+// 		{
+// 			title: String(formData.get("title")),
+// 			category: String(formData.get("category")),
+// 			division: String(formData.get("division")),
+// 			isDone: false,
+// 			timeStart: new Date(),
+// 			timeEnd: new Date(),
+// 		},
+// 	];
+// 	Object.fromEntries(formData);
+// 	await updateJob(idParam, updates);
+// 	return redirect(`/jobs/${idParam}`);
+// }
+
 export function EditJobRoute() {
 	const { job } = useLoaderData() as Awaited<ReturnType<typeof loader>>;
 
@@ -65,7 +83,7 @@ export function EditJobRoute() {
 						id="timeStart"
 						type="text"
 						name="timeStart"
-						defaultValue={job.timeStart}
+						defaultValue={JSON.stringify(job.timeStart)}
 						required
 					/>
 					<div className="mb-2 gap-2 col-span-2">
@@ -75,7 +93,7 @@ export function EditJobRoute() {
 						id="timeStart"
 						type="text"
 						name="timeStart"
-						defaultValue={job.timeStart}
+						defaultValue={JSON.stringify(job.timeStart)}
 						required
 					/>
 				</div>
@@ -84,8 +102,8 @@ export function EditJobRoute() {
 						<Label htmlFor="isDone" value="Job Division" />
 					</div>
 					<Select id="isDone" required>
-						<option value={true}>Done</option>
-						<option value={false}>In Progres</option>
+						<option value="true">Done</option>
+						<option value="false">In Progres</option>
 					</Select>
 				</div>
 

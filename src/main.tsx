@@ -44,6 +44,7 @@ const router = createBrowserRouter([
 				path: "/jobs/:jobId/edit",
 				element: <EditJobRoute />,
 				loader: editlJobsLoader,
+				// action: editAction,
 			},
 			{
 				path: "jobs/:jobId/destroy",
