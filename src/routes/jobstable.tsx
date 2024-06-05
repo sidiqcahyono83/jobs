@@ -7,16 +7,6 @@ export async function loader({ params }: LoaderFunctionArgs) {
 	return { job };
 }
 
-// export async function action({ request, params }) {
-// 	const formData = await request.formData();
-// 	const title = formData.get("title");
-// 	const updates = Object.fromEntries(formData);
-// 	updates.title;
-
-// 	await updateJob(params.jobId, updates);
-// 	return redirect(`/about/${params.jobId}`);
-// }
-
 export function DeleteRoute() {
 	return (
 		<div>
