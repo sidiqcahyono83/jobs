@@ -3,6 +3,7 @@ import {
 	LoaderFunctionArgs,
 	redirect,
 	Form,
+	Link,
 } from "react-router-dom";
 
 import { getJob, updateJob } from "../storage/jobs";
@@ -120,9 +121,12 @@ export function EditJobRoute() {
 						<option value="false">In Progres</option>
 					</Select>
 				</div>
-
-				<Button type="submit">Edit</Button>
-				<Button color="warning">Back</Button>
+				<div className="flex flex-col-2 gap-2 justify-between">
+					<Button type="submit">Edit</Button>
+					<Button color="warning" as={Link} to="/jobs">
+						Back
+					</Button>
+				</div>
 			</Form>
 		</div>
 	);
