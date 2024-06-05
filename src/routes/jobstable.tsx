@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {
 	useLoaderData,
 	Form,
@@ -25,6 +26,11 @@ export async function action({ request, params }) {
 export function ShowJobRoute() {
 	const { job } = useLoaderData() as Awaited<ReturnType<typeof loader>>;
 
+=======
+import { Form } from "react-router-dom";
+
+export function DeleteRoute() {
+>>>>>>> 7084e6adf4764abc494ebe53e47146f967b10742
 	return (
 		<div>
 			<Form method="post" className="max-w-md mx-auto">
