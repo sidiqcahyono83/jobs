@@ -1,4 +1,9 @@
-import { Link, useLoaderData } from "react-router-dom";
+import {
+	ActionFunctionArgs,
+	Form,
+	Link,
+	useLoaderData,
+} from "react-router-dom";
 
 import { getJobs } from "../storage/jobs";
 
@@ -6,6 +11,15 @@ import { getJobs } from "../storage/jobs";
 export async function loader() {
 	const jobs = await getJobs();
 	return { jobs };
+}
+
+export async function loaderSearch({ request }: ActionFunctionArgs) {
+	const url = new URL(request.url);
+	const q = url.searchParams.get("q");
+	const jobsSearch = await getJobs(q);
+	console.log(jobsSearch);
+
+	return { jobsSearch };
 }
 
 export function JobsRoute() {
@@ -154,7 +168,7 @@ export function JobsRoute() {
 					<label htmlFor="table-search" className="sr-only">
 						Search
 					</label>
-					<div className="relative">
+					<Form className="relative" role="search">
 						<div className="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none">
 							<svg
 								className="w-5 h-5 text-gray-500 dark:text-gray-400"
@@ -171,12 +185,13 @@ export function JobsRoute() {
 							</svg>
 						</div>
 						<input
-							type="text"
+							type="search"
 							id="table-search"
+							name="q"
 							className="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 							placeholder="Search for items"
 						/>
-					</div>
+					</Form>
 				</div>
 				<table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
 					<thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
