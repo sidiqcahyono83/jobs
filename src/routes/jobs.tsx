@@ -8,23 +8,18 @@ import {
 import { getJobs } from "../storage/jobs";
 
 // eslint-disable-next-line react-refresh/only-export-components
-export async function loader() {
-	const jobs = await getJobs();
-	return { jobs };
-}
 
-export async function loaderSearch({ request }: ActionFunctionArgs) {
+export async function loader({ request }: ActionFunctionArgs) {
 	const url = new URL(request.url);
 	const q = url.searchParams.get("q") || "";
-	const jobsSearch = await getJobs(q);
-	console.log(jobsSearch);
+	const job = await getJobs(q);
 
-	return { jobsSearch };
+	return { job };
 }
 
 export function JobsRoute() {
-	const { jobs } = useLoaderData() as Awaited<ReturnType<typeof loader>>;
-	if (!jobs) {
+	const { job } = useLoaderData() as Awaited<ReturnType<typeof loader>>;
+	if (!job) {
 		<p>Jobs Not Found..</p>;
 	}
 	return (
@@ -168,7 +163,7 @@ export function JobsRoute() {
 					<label htmlFor="table-search" className="sr-only">
 						Search
 					</label>
-					<Form className="relative" role="search">
+					<Form method="get" className="relative" role="search">
 						<div className="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none">
 							<svg
 								className="w-5 h-5 text-gray-500 dark:text-gray-400"
@@ -230,7 +225,7 @@ export function JobsRoute() {
 					</thead>
 
 					<tbody>
-						{jobs.map((job) => (
+						{job.map((job) => (
 							<tr
 								className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
 								key={job.id}
