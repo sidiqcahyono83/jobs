@@ -46,12 +46,10 @@ export function EditJobRoute() {
 			<h1 className="text-4xl font-bold mb-4">{job.title}</h1>
 			<Form method="post" className="flex max-w-md flex-col gap-4">
 				<TextInput
-					id="title"
-					type="text"
-					name="title"
-					placeholder="name@flowbite.com"
-					defaultValue={job.title}
-					hidden
+					type="hiden"
+					name="id"
+					defaultValue={job.id}
+					hidden="true"
 				/>
 				<div>
 					<div className="mb-2 block">
