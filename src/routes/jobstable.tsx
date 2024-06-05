@@ -1,13 +1,30 @@
-import { ActionFunctionArgs, Form, redirect } from "react-router-dom";
-import { createJob } from "../storage/jobs";
+import {
+	useLoaderData,
+	Form,
+	LoaderFunctionArgs,
+	redirect,
+} from "react-router-dom";
+import { getJob, updateJob } from "../storage/jobs";
 
-export async function action({ request }: ActionFunctionArgs) {
+export async function loader({ params }: LoaderFunctionArgs) {
+	const idParam = Number(params.jobId);
+	const job = await getJob(idParam);
+	return { job };
+}
+
+export async function action({ request, params }) {
 	const formData = await request.formData();
-	const job = await createJob(formData);
-	return redirect(`/jobs/${job.id}`);
+	const title = formData.get("title");
+	const updates = Object.fromEntries(formData);
+	updates.title;
+
+	await updateJob(params.jobId, updates);
+	return redirect(`/about/${params.jobId}`);
 }
 
 export function ShowJobRoute() {
+	const { job } = useLoaderData() as Awaited<ReturnType<typeof loader>>;
+
 	return (
 		<div>
 			<Form method="post" className="max-w-md mx-auto">
@@ -18,7 +35,7 @@ export function ShowJobRoute() {
 						id="title"
 						className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
 						placeholder=" "
-						required
+						defaultValue={job?.title}
 					/>
 					<label
 						htmlFor="title"
@@ -27,14 +44,14 @@ export function ShowJobRoute() {
 						Title Job
 					</label>
 				</div>
-				<div className="relative z-0 w-full mb-5 group">
+				{/* <div className="relative z-0 w-full mb-5 group">
 					<input
 						type="text"
 						name="category"
 						id="category"
 						className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
 						placeholder=" "
-						required
+						defaultValue={job?.category}
 					/>
 					<label
 						htmlFor="category"
@@ -50,7 +67,7 @@ export function ShowJobRoute() {
 						id="division"
 						className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
 						placeholder=" "
-						required
+						defaultValue={job?.division}
 					/>
 					<label
 						htmlFor="division"
@@ -67,7 +84,6 @@ export function ShowJobRoute() {
 							id="timeStart"
 							className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
 							placeholder=" "
-							required
 						/>
 						<label
 							htmlFor="timeStart"
@@ -83,7 +99,6 @@ export function ShowJobRoute() {
 							id="timeEnd"
 							className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
 							placeholder=" "
-							required
 						/>
 						<label
 							htmlFor="timeEnd"
@@ -104,12 +119,12 @@ export function ShowJobRoute() {
 					>
 						Is Progres
 					</label>
-				</div>
+				</div> */}
 				<button
 					type="submit"
 					className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
 				>
-					Submit
+					Update
 				</button>
 			</Form>
 		</div>

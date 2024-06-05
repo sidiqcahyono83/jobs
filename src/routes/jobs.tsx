@@ -248,12 +248,12 @@ export function JobsRoute() {
 										? "\u2714\uFE0F"
 										: "\u23F8\uFE0F"}
 								</td>
-								<td className="px-6 py-4">
+								<td className="px-6 py-4 flex gap-2">
 									<Link
 										to={`/jobs/${job.id}`}
 										className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
 									>
-										Edit
+										Detail
 									</Link>
 								</td>
 							</tr>
