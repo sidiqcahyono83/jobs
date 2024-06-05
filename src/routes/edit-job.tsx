@@ -1,6 +1,11 @@
-import { useLoaderData, LoaderFunctionArgs, Link } from "react-router-dom";
+import {
+	useLoaderData,
+	LoaderFunctionArgs,
+	redirect,
+	Form,
+} from "react-router-dom";
 
-import { getJob } from "../storage/jobs";
+import { getJob, updateJob } from "../storage/jobs";
 import { Button, Label, Select, TextInput } from "flowbite-react";
 
 export async function loader({ params }: LoaderFunctionArgs) {
@@ -9,23 +14,24 @@ export async function loader({ params }: LoaderFunctionArgs) {
 	return { job };
 }
 
-// export async function action({ request, params }: LoaderFunctionArgs) {
-// 	const idParam = Number(params.jobId);
-// 	const formData = await request.formData();
-// 	const updates = [
-// 		{
-// 			title: String(formData.get("title")),
-// 			category: String(formData.get("category")),
-// 			division: String(formData.get("division")),
-// 			isDone: false,
-// 			timeStart: new Date(),
-// 			timeEnd: new Date(),
-// 		},
-// 	];
-// 	Object.fromEntries(formData);
-// 	await updateJob(idParam, updates);
-// 	return redirect(`/jobs/${idParam}`);
-// }
+export async function action({ request, params }: LoaderFunctionArgs) {
+	const jobId = Number(params.jobId);
+	const formData = await request.formData();
+	const newJobData = {
+		id: Number(formData.get("id")),
+		title: String(formData.get("title")),
+		category: String(formData.get("category")),
+		division: String(formData.get("division")),
+		isDone: Boolean(formData.get("isDone")),
+		timeStart: new Date(),
+		timeEnd: new Date(),
+	};
+	Object.fromEntries(formData);
+
+	await updateJob(jobId, newJobData);
+
+	return redirect(`/jobs/`);
+}
 
 export function EditJobRoute() {
 	const { job } = useLoaderData() as Awaited<ReturnType<typeof loader>>;
@@ -37,15 +43,23 @@ export function EditJobRoute() {
 	return (
 		<div className="w-4/5 mx-auto">
 			<h1 className="text-4xl font-bold mb-4">{job.title}</h1>
-			<form className="flex max-w-md flex-col gap-4">
+			<Form method="post" className="flex max-w-md flex-col gap-4">
+				<TextInput
+					id="title"
+					type="text"
+					name="title"
+					placeholder="name@flowbite.com"
+					defaultValue={job.title}
+					hidden
+				/>
 				<div>
 					<div className="mb-2 block">
-						<Label htmlFor="tittle" value="Job Title" />
+						<Label htmlFor="title" value="Job Title" />
 					</div>
 					<TextInput
-						id="tittle"
+						id="title"
 						type="text"
-						name="tittle"
+						name="title"
 						placeholder="name@flowbite.com"
 						defaultValue={job.title}
 						required
@@ -81,19 +95,19 @@ export function EditJobRoute() {
 					</div>
 					<TextInput
 						id="timeStart"
-						type="text"
+						type="date"
 						name="timeStart"
 						defaultValue={JSON.stringify(job.timeStart)}
 						required
 					/>
 					<div className="mb-2 gap-2 col-span-2">
-						<Label htmlFor="timeStart" value="Job Time Start" />
+						<Label htmlFor="timeEnd" value="Job Time Start" />
 					</div>
 					<TextInput
-						id="timeStart"
-						type="text"
-						name="timeStart"
-						defaultValue={JSON.stringify(job.timeStart)}
+						id="timeEnd"
+						type="date"
+						name="timeEnd"
+						defaultValue={JSON.stringify(job.timeEnd)}
 						required
 					/>
 				</div>
@@ -101,17 +115,15 @@ export function EditJobRoute() {
 					<div className="mb-2 block">
 						<Label htmlFor="isDone" value="Job Division" />
 					</div>
-					<Select id="isDone" required>
+					<Select id="isDone" name="isDone" required>
 						<option value="true">Done</option>
 						<option value="false">In Progres</option>
 					</Select>
 				</div>
 
 				<Button type="submit">Edit</Button>
-				<Button color="warning">
-					<Link to="/jobs">Back</Link>
-				</Button>
-			</form>
+				<Button color="warning">Back</Button>
+			</Form>
 		</div>
 	);
 }

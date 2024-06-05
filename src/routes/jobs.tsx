@@ -15,7 +15,7 @@ export async function loader() {
 
 export async function loaderSearch({ request }: ActionFunctionArgs) {
 	const url = new URL(request.url);
-	const q = url.searchParams.get("q");
+	const q = url.searchParams.get("q") || "";
 	const jobsSearch = await getJobs(q);
 	console.log(jobsSearch);
 

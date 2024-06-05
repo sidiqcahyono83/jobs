@@ -10,7 +10,11 @@ import { Home } from "./routes/home";
 import { DetailJobRoute, loader as deatailJobsLoader } from "./routes/job";
 import { JobsRoute, loader as jobsLoader } from "./routes/jobs";
 import { AddJobRoute, action as addJobAction } from "./routes/add-job";
-import { EditJobRoute, loader as editlJobsLoader } from "./routes/edit-job";
+import {
+	EditJobRoute,
+	loader as editlJobsLoader,
+	action as editJobAction,
+} from "./routes/edit-job";
 
 import { action as destroyAction } from "./routes/destroy";
 
@@ -44,7 +48,7 @@ const router = createBrowserRouter([
 				path: "/jobs/:jobId/edit",
 				element: <EditJobRoute />,
 				loader: editlJobsLoader,
-				// action: editAction,
+				action: editJobAction,
 			},
 			{
 				path: "jobs/:jobId/destroy",
