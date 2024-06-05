@@ -1,13 +1,6 @@
-import { ActionFunctionArgs, Form, redirect } from "react-router-dom";
-import { createJob } from "../storage/jobs";
+import { Form } from "react-router-dom";
 
-export async function action({ request }: ActionFunctionArgs) {
-	const formData = await request.formData();
-	const job = await createJob(formData);
-	return redirect(`/jobs/${job.id}`);
-}
-
-export function ShowJobRoute() {
+export function DeleteRoute() {
 	return (
 		<div>
 			<Form method="post" className="max-w-md mx-auto">

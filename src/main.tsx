@@ -10,8 +10,9 @@ import { Home } from "./routes/home";
 import { DetailJobRoute, loader as deatailJobsLoader } from "./routes/job";
 import { JobsRoute, loader as jobsLoader } from "./routes/jobs";
 import { AddJobRoute, action as addJobAction } from "./routes/add-job";
-import { EditJobRoute } from "./routes/edit-job";
-import { ShowJobRoute } from "./routes/jobstable";
+import { DeleteRoute } from "./routes/jobstable";
+import { EditJobRoute, action as editJobAction } from "./routes/edit-job";
+import { action as destroyAction } from "./routes/destroy";
 
 const router = createBrowserRouter([
 	{
@@ -42,10 +43,16 @@ const router = createBrowserRouter([
 				path: "jobs/:jobId/edit",
 				element: <EditJobRoute />,
 				loader: jobsLoader,
+				action: editJobAction,
+			},
+			{
+				path: "jobs/:jobId/destroy",
+				action: destroyAction,
+				errorElement: <div>Oops! There was an error.</div>,
 			},
 			{
 				path: "/about",
-				element: <ShowJobRoute />,
+				element: <DeleteRoute />,
 			},
 		],
 	},
