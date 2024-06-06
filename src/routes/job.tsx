@@ -20,7 +20,7 @@ export function DetailJobRoute() {
 	}
 
 	return (
-		<div className="w-4/5 mx-auto">
+		<div className="max-w-lg mx-auto justify-center">
 			<h1 className="text-4xl font-bold mb-4">{job.title}</h1>
 			<div className="text-xl">
 				<p>Category: {job.category}</p>

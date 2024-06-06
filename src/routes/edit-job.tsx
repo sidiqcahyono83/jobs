@@ -7,11 +7,13 @@ import {
 } from "react-router-dom";
 
 import { getJob, updateJob } from "../storage/jobs";
-import { Button, Label, Radio, Select, TextInput } from "flowbite-react";
+import { Button, Label, Radio, TextInput } from "flowbite-react";
+import { getTimeString } from "../datetime/date";
 
 export async function loader({ params }: LoaderFunctionArgs) {
 	const idParam = Number(params.jobId);
 	const job = await getJob(idParam);
+	console.log({ job });
 	return { job };
 }
 
@@ -100,7 +102,7 @@ export function EditJobRoute() {
 							id="timeStart"
 							type="date"
 							name="timeStart"
-							defaultValue={JSON.stringify(job.timeStart)}
+							defaultValue={getTimeString(job.timeStart) || ""}
 							required
 						/>
 						<div className="mb-2 gap-2 col-span-2">
@@ -110,41 +112,24 @@ export function EditJobRoute() {
 							id="timeEnd"
 							type="date"
 							name="timeEnd"
-							defaultValue={JSON.stringify(job.timeEnd)}
+							defaultValue={getTimeString(job.timeEnd) || ""}
 							required
 						/>
 					</div>
-					<fieldset className="flex max-w-md flex-col gap-4">
+					<fieldset className="flex max-w-md justify-center gap-4">
 						<legend className="mb-4">
 							Choose your progres job
 						</legend>
 						<div className="flex items-center gap-2">
-							<Radio
-								id="united-state"
-								name="countries"
-								value="USA"
-								defaultChecked
-							/>
-							<Label htmlFor="united-state">United States</Label>
+							<Radio id="isDone" name="isDone" typeof="false" />
+							<Label htmlFor="isDone">In progres</Label>
 						</div>
 						<div className="flex items-center gap-2">
-							<Radio
-								id="germany"
-								name="countries"
-								value="Germany"
-							/>
-							<Label htmlFor="germany">Germany</Label>
+							<Radio id="isDone2" name="isDone2" typeof="true" />
+							<Label htmlFor="isDone2">Done</Label>
 						</div>
 					</fieldset>
-					<div>
-						<div className="mb-2 block">
-							<Label htmlFor="isDone" value="Job Division" />
-						</div>
-						<Select id="isDone" name="isDone" required>
-							<option value="false">In Progres</option>
-							<option value="true">Done</option>
-						</Select>
-					</div>
+
 					<div className="flex flex-col-2 gap-2 justify-between">
 						<Button type="submit">Edit</Button>
 						<Button color="warning" as={Link} to="/jobs">

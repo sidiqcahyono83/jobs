@@ -254,7 +254,7 @@ export function JobsRoute() {
 								<td className="px-6 py-4">{job.division}</td>
 								<td className="px-6 py-4">{job.category}</td>
 								<td className="px-6 py-4">
-									{job.isDone
+									{job.isDone == true
 										? "\u2714\uFE0F"
 										: "\u23F8\uFE0F"}
 								</td>
