@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 
 import { getJob, updateJob } from "../storage/jobs";
-import { Button, Label, Select, TextInput } from "flowbite-react";
+import { Button, Label, Radio, Select, TextInput } from "flowbite-react";
 
 export async function loader({ params }: LoaderFunctionArgs) {
 	const idParam = Number(params.jobId);
@@ -42,90 +42,117 @@ export function EditJobRoute() {
 	}
 
 	return (
-		<div className="w-4/5 mx-auto">
-			<h1 className="text-4xl font-bold mb-4">{job.title}</h1>
-			<Form method="post" className="flex max-w-md flex-col gap-4">
-				<TextInput
-					type="hiden"
-					name="id"
-					defaultValue={job.id}
-					hidden="true"
-				/>
-				<div>
-					<div className="mb-2 block">
-						<Label htmlFor="title" value="Job Title" />
-					</div>
+		<div className="w-4/5 mx-auto items-center">
+			<h1 className="text-4xl font-bold mb-4 text-center">{job.title}</h1>
+			<div className="flex justify-center">
+				<Form
+					method="post"
+					className="flex flex-col max-w-lg content-center gap-4"
+				>
 					<TextInput
-						id="title"
-						type="text"
-						name="title"
-						placeholder="name@flowbite.com"
-						defaultValue={job.title}
-						required
+						type="hiden"
+						name="id"
+						defaultValue={job.id}
+						hidden={true}
 					/>
-				</div>
-				<div>
-					<div className="mb-2 block">
-						<Label htmlFor="Category" value="Job Category" />
+					<div>
+						<div className="mb-2 block">
+							<Label htmlFor="title" value="Job Title" />
+						</div>
+						<TextInput
+							id="title"
+							type="text"
+							name="title"
+							placeholder="name@flowbite.com"
+							defaultValue={job.title}
+							required
+						/>
 					</div>
-					<TextInput
-						id="Category"
-						type="text"
-						name="category"
-						defaultValue={job.category}
-						required
-					/>
-				</div>
-				<div>
-					<div className="mb-2 block">
-						<Label htmlFor="division" value="Job Division" />
+					<div>
+						<div className="mb-2 block">
+							<Label htmlFor="Category" value="Job Category" />
+						</div>
+						<TextInput
+							id="Category"
+							type="text"
+							name="category"
+							defaultValue={job.category}
+							required
+						/>
 					</div>
-					<TextInput
-						id="division"
-						type="text"
-						name="division"
-						defaultValue={job.division}
-						required
-					/>
-				</div>
-				<div className="flex gap-2 col-span-2">
-					<div className="mb-2 block">
-						<Label htmlFor="timeStart" value="Job Time Start" />
+					<div>
+						<div className="mb-2 block">
+							<Label htmlFor="division" value="Job Division" />
+						</div>
+						<TextInput
+							id="division"
+							type="text"
+							name="division"
+							defaultValue={job.division}
+							required
+						/>
 					</div>
-					<TextInput
-						id="timeStart"
-						type="date"
-						name="timeStart"
-						defaultValue={JSON.stringify(job.timeStart)}
-						required
-					/>
-					<div className="mb-2 gap-2 col-span-2">
-						<Label htmlFor="timeEnd" value="Job Time Start" />
+					<div className="flex gap-2">
+						<div className="mb-2 block">
+							<Label htmlFor="timeStart" value="Job Time Start" />
+						</div>
+						<TextInput
+							id="timeStart"
+							type="date"
+							name="timeStart"
+							defaultValue={JSON.stringify(job.timeStart)}
+							required
+						/>
+						<div className="mb-2 gap-2 col-span-2">
+							<Label htmlFor="timeEnd" value="Job Time Start" />
+						</div>
+						<TextInput
+							id="timeEnd"
+							type="date"
+							name="timeEnd"
+							defaultValue={JSON.stringify(job.timeEnd)}
+							required
+						/>
 					</div>
-					<TextInput
-						id="timeEnd"
-						type="date"
-						name="timeEnd"
-						defaultValue={JSON.stringify(job.timeEnd)}
-						required
-					/>
-				</div>
-				<div>
-					<div className="mb-2 block">
-						<Label htmlFor="isDone" value="Job Division" />
+					<fieldset className="flex max-w-md flex-col gap-4">
+						<legend className="mb-4">
+							Choose your progres job
+						</legend>
+						<div className="flex items-center gap-2">
+							<Radio
+								id="united-state"
+								name="countries"
+								value="USA"
+								defaultChecked
+							/>
+							<Label htmlFor="united-state">United States</Label>
+						</div>
+						<div className="flex items-center gap-2">
+							<Radio
+								id="germany"
+								name="countries"
+								value="Germany"
+							/>
+							<Label htmlFor="germany">Germany</Label>
+						</div>
+					</fieldset>
+					<div>
+						<div className="mb-2 block">
+							<Label htmlFor="isDone" value="Job Division" />
+						</div>
+						<Select id="isDone" name="isDone" required>
+							<option value="false">In Progres</option>
+							<option value="true">Done</option>
+						</Select>
 					</div>
-					<Select id="isDone" name="isDone" required>
-						<option value="true">Done</option>
-						<option value="false">In Progres</option>
-					</Select>
-				</div>
-				<div className="flex flex-col-2 gap-2 justify-between">
-					<Button type="submit">Edit</Button>
-					<Button color="warning" as={Link} to="/jobs">
-						Back
-					</Button>
-				</div>
-			</Form>
+					<div className="flex flex-col-2 gap-2 justify-between">
+						<Button type="submit">Edit</Button>
+						<Button color="warning" as={Link} to="/jobs">
+							Back
+						</Button>
+					</div>
+				</Form>
+			</div>
 		</div>
 	);
 }
