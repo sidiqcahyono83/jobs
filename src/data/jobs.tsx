@@ -3,7 +3,7 @@ export type Job = {
 	title: string;
 	category: string;
 	division: string;
-	isDone: boolean;
+	isDone: string;
 	timeStart?: Date;
 	timeEnd?: Date;
 };
@@ -13,21 +13,21 @@ export const dataJobs: Job[] = [
 		title: "Repair",
 		category: "usual",
 		division: "technician",
-		isDone: false,
+		isDone: "In progres",
 	},
 	{
 		id: 2,
 		title: "Splicing",
 		category: "urgent",
 		division: "staff",
-		isDone: true,
+		isDone: "Still running",
 	},
 	{
 		id: 3,
 		title: "Teach",
 		category: "soon",
 		division: "staff",
-		isDone: true,
+		isDone: "Done",
 		timeStart: new Date("2024-05-22 19:30"),
 		timeEnd: new Date("2024-05-22 21:30"),
 	},

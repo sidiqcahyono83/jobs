@@ -254,9 +254,11 @@ export function JobsRoute() {
 								<td className="px-6 py-4">{job.division}</td>
 								<td className="px-6 py-4">{job.category}</td>
 								<td className="px-6 py-4">
-									{job.isDone == true
-										? "\u2714\uFE0F"
-										: "\u23F8\uFE0F"}
+									{job.isDone === "In progres"
+										? "\u23F8\uFE0F"
+										: job.isDone === "Still running"
+										? "\u23F3"
+										: "\u2714\uFE0F"}
 								</td>
 								<td className="px-6 py-4 flex gap-2">
 									<Link

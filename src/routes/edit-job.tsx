@@ -25,7 +25,7 @@ export async function action({ request, params }: LoaderFunctionArgs) {
 		title: String(formData.get("title")),
 		category: String(formData.get("category")),
 		division: String(formData.get("division")),
-		isDone: Boolean(formData.get("isDone")),
+		isDone: String(formData.get("isDone")),
 		timeStart: new Date(),
 		timeEnd: new Date(),
 	};
@@ -117,16 +117,30 @@ export function EditJobRoute() {
 						/>
 					</div>
 					<fieldset className="flex max-w-md justify-center gap-4">
-						<legend className="mb-4">
+						<legend className="mb-4 items-center gap-2">
 							Choose your progres job
 						</legend>
 						<div className="flex items-center gap-2">
-							<Radio id="isDone" name="isDone" typeof="false" />
+							<Radio
+								id="isDone"
+								name="isDone"
+								value="In progres"
+								defaultChecked
+							/>
 							<Label htmlFor="isDone">In progres</Label>
 						</div>
+
 						<div className="flex items-center gap-2">
-							<Radio id="isDone2" name="isDone2" typeof="true" />
-							<Label htmlFor="isDone2">Done</Label>
+							<Radio
+								id="isDone"
+								name="isDone"
+								value="Still running"
+							/>
+							<Label htmlFor="isDone">Still running</Label>
+						</div>
+						<div className="flex items-center gap-2">
+							<Radio id="isDone" name="isDone" value="Done" />
+							<Label htmlFor="isDone">Done</Label>
 						</div>
 					</fieldset>
 
