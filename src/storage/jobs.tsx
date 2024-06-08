@@ -22,7 +22,7 @@ export async function createJob(formData: FormData) {
 		title: String(formData.get("title")),
 		category: String(formData.get("category")),
 		division: String(formData.get("division")),
-		isDone: false,
+		isDone: String(formData.get("isDone")),
 		timeStart: new Date(),
 		timeEnd: new Date(),
 	};
