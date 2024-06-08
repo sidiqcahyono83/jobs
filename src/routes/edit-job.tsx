@@ -44,7 +44,7 @@ export function EditJobRoute() {
 	}
 
 	return (
-		<div className="w-4/5 mx-auto items-center">
+		<div className="w-full mx-auto items-center">
 			<h1 className="text-4xl font-bold mb-4 text-center">{job.title}</h1>
 			<div className="flex justify-center">
 				<Form
@@ -95,26 +95,35 @@ export function EditJobRoute() {
 						/>
 					</div>
 					<div className="flex gap-2">
-						<div className="mb-2 block">
-							<Label htmlFor="timeStart" value="Job Time Start" />
+						<div className="justify-center">
+							<div className="mb-2 block text-center">
+								<Label
+									htmlFor="timeStart"
+									value="Job Time Start"
+								/>
+							</div>
+							<TextInput
+								id="timeStart"
+								type="date"
+								name="timeStart"
+								defaultValue={
+									getTimeString(job.timeStart) || ""
+								}
+								required
+							/>
 						</div>
-						<TextInput
-							id="timeStart"
-							type="date"
-							name="timeStart"
-							defaultValue={getTimeString(job.timeStart) || ""}
-							required
-						/>
-						<div className="mb-2 gap-2 col-span-2">
-							<Label htmlFor="timeEnd" value="Job Time Start" />
+						<div>
+							<div className="mb-2 gap-2 text-center">
+								<Label htmlFor="timeEnd" value="Job Time End" />
+							</div>
+							<TextInput
+								id="timeEnd"
+								type="date"
+								name="timeEnd"
+								defaultValue={getTimeString(job.timeEnd) || ""}
+								required
+							/>
 						</div>
-						<TextInput
-							id="timeEnd"
-							type="date"
-							name="timeEnd"
-							defaultValue={getTimeString(job.timeEnd) || ""}
-							required
-						/>
 					</div>
 					<fieldset className="flex max-w-md justify-center gap-4">
 						<legend className="mb-4 items-center gap-2">
